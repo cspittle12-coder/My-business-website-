@@ -80,6 +80,7 @@ button {
 
 .product__media img { width: 100%; border-radius: 4px; }
 .product__price { display: block; font-size: 1.25rem; margin: 0.5rem 0 1rem; }
+.product__production-note { color: #555; font-size: 0.9rem; margin: 0.5rem 0 1rem; }
 
 .cart__table { width: 100%; border-collapse: collapse; }
 .cart__table th, .cart__table td { text-align: left; padding: 0.75rem; border-bottom: 1px solid var(--border-color); }
