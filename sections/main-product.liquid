@@ -1,0 +1,57 @@
+<div class="product">
+  <div class="product__media">
+    {% if product.featured_image %}
+      <img
+        src="{{ product.featured_image | image_url: width: 900 }}"
+        alt="{{ product.featured_image.alt | escape }}"
+        width="900"
+        height="{{ 900 | divided_by: product.featured_image.aspect_ratio }}"
+      >
+    {% endif %}
+  </div>
+
+  <div class="product__info">
+    <h1>{{ product.title }}</h1>
+    <span class="product__price">
+      {%- if product.price_varies -%}
+        {{ 'from' }} {{ product.price_min | money }}
+      {%- else -%}
+        {{ product.price | money }}
+      {%- endif -%}
+    </span>
+
+    <div class="product__description">{{ product.description }}</div>
+
+    {% form 'product', product %}
+      {% unless product.has_only_default_variant %}
+        {% for option in product.options_with_values %}
+          <label for="option-{{ option.name | handleize }}">{{ option.name }}</label>
+          <select id="option-{{ option.name | handleize }}" name="options[{{ option.name }}]">
+            {% for value in option.values %}
+              <option value="{{ value }}">{{ value }}</option>
+            {% endfor %}
+          </select>
+        {% endfor %}
+      {% endunless %}
+
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" value="1" min="1">
+
+      <button type="submit" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+        {% if product.selected_or_first_available_variant.available %}
+          Add to cart
+        {% else %}
+          Sold out
+        {% endif %}
+      </button>
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": []
+}
+{% endschema %}

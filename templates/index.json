@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "banner": {
+      "type": "image-banner",
+      "settings": {
+        "heading": "Shirts made for everyday",
+        "subheading": "Soft, durable, and built to last.",
+        "button_label": "Shop the collection",
+        "button_link": "/collections/shirts"
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Shop shirts",
+        "collection": "shirts",
+        "products_to_show": 8
+      }
+    }
+  },
+  "order": ["banner", "featured"]
+}
